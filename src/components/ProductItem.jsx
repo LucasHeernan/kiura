@@ -1,6 +1,6 @@
 import { Text, View, Image, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-// import { Headline } from "react-native-paper";
+import { Headline } from "react-native-paper";
 
 export default function ProductItem({ info }) {
 
@@ -20,9 +20,9 @@ export default function ProductItem({ info }) {
           <Image source={{uri: thumbnail}} alt={title} style={styles.noStock} />
         }
         <View style={styles.price}>
-          <Text style={ stock ? ({fontWeight: "bold"}) : {fontWeight: "bold", opacity: 0.3}}>
+          <Headline style={ stock ? ({fontWeight: "bold"}) : {fontWeight: "bold", opacity: 0.3}}>
             $ {price}
-          </Text>
+          </Headline>
           <Text style={{marginTop: 10}} numberOfLines={3}>{title}</Text>
         </View>
       </Pressable>

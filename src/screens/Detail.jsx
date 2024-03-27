@@ -1,32 +1,136 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductByID } from "../redux/actions";
-import { View, Text, Button } from "react-native";
+import { getProductByID, addToCart } from "../redux/actions";
+import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Button, Caption, Headline } from "react-native-paper"
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Detail({ route, navigation }) {
 
   const { id } = route.params
   const dispatch = useDispatch();
-  const { detail } = useSelector(store => store);
+  const { detail, cart } = useSelector(store => store);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     dispatch(getProductByID(id));
   }, [dispatch])
 
+  useEffect(() => {
+    setProduct({
+      id: detail.id,
+      title: detail.title,
+      description: detail.description,
+      price: detail.price,
+      stock: detail.stock,
+      category: detail.category,
+      thumbnail: detail.thumbnail,
+      images: detail.images
+    })
+  }, [detail])
+
+  const handleSubmit = () => {
+    const exists = cart.find(e => e.id === id)
+    if (!exists) {
+      dispatch(addToCart(product));
+      alert("Product added to cart!");
+    } else { alert("This product is already in the cart") }
+  }
+
   return (
-    <View>
-      {
-        Object.keys(detail) < 1 ?
-        <Text>TODAVIA NADA ...</Text> :
-        <View>
-          <Text>ID: {detail.id}</Text>
-          <Text>TITLE: {detail.title}</Text>
-          <Text>DESCRIPTION: {detail.description}</Text>
-          <Text>PRICE: {detail.price}</Text>
-        </View>
-      }
-      <Button title="Go to SplashScreen" onPress={() => navigation.navigate('SplashScreen')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
+    <SafeAreaView style={{flex: 1, backgroundColor: "white"}}>
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          paddingTop: 16,
+          paddingHorizontal: 16,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 20
+        }}
+      >
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons
+            name="chevron-back"
+            style={{
+              fontSize: 18,
+              color: '#777777',
+              padding: 12,
+              backgroundColor: '#F0F0F3',
+              borderRadius: 12,
+            }}
+          />
+        </TouchableOpacity>
+      </View>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        {
+          detail.stock ? <Image source={{uri: detail.thumbnail}} alt={detail.title} style={styles.thumbnail} /> :
+          <Image source={{uri: detail.thumbnail}} alt={detail.title} style={styles.noStock}/>
+        }
+        <Caption style={{letterSpacing: 2, alignItems: "center", marginBottom:2, marginTop: 20}}>{detail.category}</Caption>
+        <Headline style={styles.title}>{detail.title}</Headline>
+        <Headline style={styles.price}>$ {detail.price}</Headline>
+        {
+          detail.stock ? <Button icon="cash" mode="contained" style={styles.carting} onPress={handleSubmit}>ADD TO CART</Button> :
+          <Button icon="cash" mode="contained" style={styles.noCarting}
+            onPress={() => alert('At the moment we do not have this product')}>NO STOCK
+          </Button>
+        }
+        <Text style={styles.description}>{detail.description}</Text>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingLeft: 50,
+    paddingRight: 50,
+    padding: 12,
+    backgroundColor: 'white'
+  },
+  thumbnail: {
+    width: "100%",
+    height: 300,
+    resizeMode: "contain",
+    borderRadius: 12
+  },
+  noStock: {
+    width: "100%",
+    height: 300,
+    resizeMode: "contain",
+    borderRadius: 12,
+    opacity: 0.6
+  },
+  title: {
+    lineHeight: 20,
+    fontSize: 15,
+    fontWeight: "bold",
+    marginBottom: 18,
+  },
+  price: {
+    fontWeight: "bold",
+    color: "green",
+    fontSize: 19
+  },
+  description: {
+    lineHeight: 24,
+    fontSize: 16
+  },
+  carting: {
+    backgroundColor: "#C7D31E",
+    color: "white",
+    marginTop: 15,
+    marginBottom: 15,
+    borderRadius: 12
+  },
+  noCarting: {
+    backgroundColor: "#C7D31E",
+    color: "white",
+    marginTop: 15,
+    marginBottom: 15,
+    borderRadius: 12,
+    opacity: 0.6
+  }
+});
