@@ -9,10 +9,10 @@ const Stack = createNativeStackNavigator();
 export default function MyStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="SplashScreen" component={SplashScreen} />
-      <Stack.Screen name="Products" component={Products} />
-      <Stack.Screen name="Detail" component={Detail} />
-      <Stack.Screen name="Cart" component={Cart} />
+      <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Products" component={Products} options={{ headerShown: false }}/>
+      <Stack.Screen name="Detail" component={Detail} options={{ headerShown: false }} />
+      <Stack.Screen name="Cart" component={Cart} options={{ headerShown: false }} />
       {/* <Stack.Screen name="Create" component={Create} /> */}
       {/* <Stack.Screen name="Update" component={Update} /> */}
     </Stack.Navigator>

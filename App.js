@@ -1,8 +1,7 @@
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
 import store from "./src/redux";
-import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
-import MyStack from './Navigation';
+import { NavigationContainer } from "@react-navigation/native";
+import MyStack from "./Navigation";
 
 
 export default function App() {
@@ -15,12 +14,5 @@ export default function App() {
   );
 }
 
-// CATEGORIES
-// [
-//   "smartphones",
-//   "laptops",
-//   "furniture",
-//   "mens-watches",
-//   "womens-watches",
-//   "sunglasses"
-// ]
+const colors = ["#4CC671", "#0594A4", "#173B48"];
+const typographic = "League Spartan";

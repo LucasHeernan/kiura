@@ -29,7 +29,7 @@ export default function Filter() {
         data={categories}
         setSelected={setCategory}
         onSelect={() => handlerByCatogory(category)}
-        placeholder="Category"
+        placeholder="Categories"
         search={false}
         boxStyles={styles.box}
         inputStyles={styles.test}
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "white"
+    backgroundColor: "white",
+    paddingHorizontal: 16
   },
   box: {
     borderColor: "#B9B9B9",
@@ -59,6 +60,6 @@ const styles = StyleSheet.create({
   },
   test: {
     fontSize: 12,
-    color: "#777777",
+    color: "#777777"
   }
 })

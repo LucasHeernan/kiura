@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { cleanCart } from "../redux/actions";
+import { clearCart } from "../redux/actions";
 import { Ionicons } from "@expo/vector-icons";
 import CartItem from "../components/CartItem";
 
@@ -10,7 +10,7 @@ export default function Cart({ navigation }) {
 
   const dispatch = useDispatch();
   const { cart } = useSelector(store => store);
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
 
   const handleTotal = () => {
     setTotal(cart.filter(e => e.total).reduce((acc, curr) => {
@@ -19,10 +19,15 @@ export default function Cart({ navigation }) {
     }, 0));
   }
 
+  const payment = () => {
+    dispatch(clearCart());
+    alert("Your order has been registered successfully.");
+  }
+
   useEffect(() => {
     handleTotal();
   }, [cart])
-  
+
 
   return (
     <View
@@ -167,7 +172,7 @@ export default function Cart({ navigation }) {
                 marginBottom: 7
               }}
             >
-              {/* <Text
+              <Text
                 style={{
                   fontSize: 12,
                   fontWeight: "400",
@@ -176,7 +181,7 @@ export default function Cart({ navigation }) {
                   opacity: 0.5,
                 }}
               >
-                Welcome Discount  10%
+                Discount  10%
               </Text>
               <Text
                 style={{
@@ -187,7 +192,7 @@ export default function Cart({ navigation }) {
                 }}
               >
                 -   {total * 10 / 100}
-              </Text> */}
+              </Text>
             </View>
 
             <View
@@ -212,13 +217,10 @@ export default function Cart({ navigation }) {
                   fontWeight: "500",
                   color: "black",
                 }}>
-                $ {total}
+                $ {total - (total * 10 / 100)}
               </Text>
             </View>
-
           </View>
-
-
         </View>
 
       </ScrollView>
@@ -232,8 +234,8 @@ export default function Cart({ navigation }) {
           alignItems: "center",
         }}
       >
-        
         <TouchableOpacity
+          onPress={payment}
           variant="primary"
           title="Checkout"
           style={{
@@ -245,7 +247,6 @@ export default function Cart({ navigation }) {
             alignItems: "center",
           }}
         >
-
           <Text
             style={{
               fontSize: 18,
