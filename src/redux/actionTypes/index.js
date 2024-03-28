@@ -1,14 +1,18 @@
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
-
-export const GET_CATEGORY = "GET_CATEGORY";
 export const GET_PRODUCT_BY_NAME = "GET_PRODUCT_BY_NAME";
-export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
 
 export const CREATE_PRODUCT = "CREATE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
+export const GET_CATEGORY = "GET_CATEGORY";
+export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
+
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-export const CLEAN_CART = "CLEAN_CART";
+export const ADD_TO_TOTAL = "ADD_TO_TOTAL";
+export const LESS_TO_TOTAL = "LESS_TO_TOTAL";
+export const CLEAR_CART = "CLEAR_CART";
+
+export const CLEAR_PRODUCTS = "CLEAR_PRODUCTS";

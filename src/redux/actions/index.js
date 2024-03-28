@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GET_ALL_PRODUCTS, GET_PRODUCT_BY_ID, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_CATEGORY, GET_PRODUCT_BY_NAME, ORDER_BY_PRICE,
-ADD_TO_CART, REMOVE_FROM_CART, CLEAN_CART } from "../actionTypes";
+ADD_TO_CART, REMOVE_FROM_CART, ADD_TO_TOTAL, LESS_TO_TOTAL, CLEAR_CART, CLEAR_PRODUCTS } from "../actionTypes";
 
 export function getAllProducts() {
   return async (dispatch) => {
@@ -72,22 +72,12 @@ export function deleteProduct(id) {
   }
 }
 
-export function getCategory(category) {
-  return async (dispatch) => {
-    try {
-      const data = await axios(`https://dummyjson.com/products/category/${category}`).then(e => e.data);
-      return dispatch({
-        type: GET_CATEGORY,
-        payload: data
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
+export function getCategory(payload) {
+  return { type: GET_CATEGORY, payload }
 }
 
-export function getProductByName(payload) {
-  return { type: GET_PRODUCT_BY_NAME, payload }
+export function getProductByName(text) {
+  return { type: GET_PRODUCT_BY_NAME, payload: text }
 }
 
 export function orderByPrice(payload) {
@@ -102,6 +92,18 @@ export function removeFromCart(id) {
   return { type: REMOVE_FROM_CART, payload: id }
 }
 
-export function cleanCart() {
-  return { type: CLEAN_CART }
+export function addToTotal(id) {
+  return { type: ADD_TO_TOTAL, payload: id }
+}
+
+export function lessToTotal(id) {
+  return { type: LESS_TO_TOTAL, payload: id}
+}
+
+export function clearCart() {
+  return { type: CLEAR_CART }
+}
+
+export function clearProducts() {
+  return { type: CLEAR_PRODUCTS }
 }

@@ -20,12 +20,10 @@ export default function Detail({ route, navigation }) {
     setProduct({
       id: detail.id,
       title: detail.title,
-      description: detail.description,
       price: detail.price,
       stock: detail.stock,
-      category: detail.category,
       thumbnail: detail.thumbnail,
-      images: detail.images
+      total: 1
     })
   }, [detail])
 

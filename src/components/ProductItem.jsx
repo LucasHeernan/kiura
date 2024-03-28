@@ -2,10 +2,10 @@ import { Text, View, Image, StyleSheet, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Headline } from "react-native-paper";
 
-export default function ProductItem({ info }) {
+export default function ProductItem({ product }) {
 
   const navigation = useNavigation();
-  const { id, title, thumbnail, price, stock } = info
+  const { id, title, thumbnail, price, stock } = product;
 
   return (
     <View style={styles.view}>
@@ -30,7 +30,6 @@ export default function ProductItem({ info }) {
   );
 }
 
-            
 
 const styles = StyleSheet.create({
   container: {
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   thumbnail: {
     width: "85%", 
     height: 220, 
-    resizeMode: "cover",
+    resizeMode: "contain",
     alignSelf: "center"
   },
   noStock: {

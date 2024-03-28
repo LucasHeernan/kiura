@@ -1,10 +1,11 @@
 import { GET_ALL_PRODUCTS, GET_PRODUCT_BY_ID, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_CATEGORY, GET_PRODUCT_BY_NAME, ORDER_BY_PRICE,
-ADD_TO_CART, REMOVE_FROM_CART, CLEAN_CART } from "../actionTypes";
+ADD_TO_CART, REMOVE_FROM_CART, ADD_TO_TOTAL, LESS_TO_TOTAL, CLEAR_CART, CLEAR_PRODUCTS } from "../actionTypes";
 
 const initialState = {
   allProducts: [],
   category: [],
   detail: [],
+  search: "",
   cart: []
 };
 
@@ -41,15 +42,20 @@ const reducer = ( state = initialState, action ) => {
         allProducts: productDelete
       }
     case GET_CATEGORY:
+      const all = [...state.allProducts]
+      const filterCategory = all.filter(e => e.category === action.payload)
       return {
         ...state,
-        category: action.payload
+        category: filterCategory
       }
     case GET_PRODUCT_BY_NAME:
-      const productByName = state.allProducts.filter(e => e.title.toLowerCase().includes(action.payload.toLowerCase()))
+      const searchText = action.payload.toLowerCase();
+      const productByName = state.allProducts.filter(e => e.title.toLowerCase().includes(searchText));
+      if (productByName.length === 0) alert("No products found matching your search.");
       return {
         ...state,
-        allProducts: productByName
+        category: productByName.length > 0 ? productByName : [],
+        search: searchText
       }
     case ORDER_BY_PRICE:
       let allPrices = [...state.allProducts]
@@ -66,7 +72,7 @@ const reducer = ( state = initialState, action ) => {
       })
       return {
         ...state,
-        allProducts: state.category.length ? categoryPrices : allPrices
+        category: state.category.length ? categoryPrices : allPrices
       }
     case ADD_TO_CART:
       return {
@@ -79,10 +85,25 @@ const reducer = ( state = initialState, action ) => {
         ...state,
         cart: productOut
       }
-    case CLEAN_CART:
+    case ADD_TO_TOTAL:
+      return {
+        ...state,
+        cart: [...state.cart, state.cart.find(e => e.id === action.payload).total += 1]
+      }
+    case LESS_TO_TOTAL:
+      return {
+        ...state,
+        cart: [...state.cart, state.cart.find(e => e.id === action.payload).total -= 1]
+      }
+    case CLEAR_CART:
       return {
         ...state,
         cart: []
+      }
+    case CLEAR_PRODUCTS:
+      return {
+        ...state,
+        category: []
       }
     default: return { ...state }
   }
