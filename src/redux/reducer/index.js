@@ -1,8 +1,9 @@
 import { GET_ALL_PRODUCTS, GET_PRODUCT_BY_ID, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_CATEGORY, GET_PRODUCT_BY_NAME, ORDER_BY_PRICE,
-ADD_TO_CART, REMOVE_FROM_CART, ADD_TO_TOTAL, LESS_TO_TOTAL, CLEAR_CART, CLEAR_PRODUCTS } from "../actionTypes";
+ADD_TO_CART, REMOVE_FROM_CART, ADD_TO_TOTAL, LESS_TO_TOTAL, CLEAR_CART, CLEAR_PRODUCTS, GET_CATEGORIES, CLEAR_DETAIL } from "../actionTypes";
 
 const initialState = {
   allProducts: [],
+  categories: [],
   category: [],
   detail: [],
   search: "",
@@ -19,7 +20,7 @@ const reducer = ( state = initialState, action ) => {
     case GET_PRODUCT_BY_ID:
       return {
         ...state,
-        detail: action.payload
+        detail: state.allProducts.find(e => e.id === action.payload)
       }
     case CREATE_PRODUCT:
       return {
@@ -27,13 +28,15 @@ const reducer = ( state = initialState, action ) => {
         allProducts: [...state.allProducts, action.payload]
       }
     case UPDATE_PRODUCT:
-      const productIndex = state.allProducts.findIndex(e => e.id === action.payload.id);
-      if (productIndex === -1) return state;
-      const updatedProducts = [...state.allProducts];
-      updatedProducts[productIndex] = action.payload;
+      const updatedProduct = state.allProducts.map(product => product.id === action.payload.id ? action.payload : product)
+
+      // const productIndex = state.allProducts.findIndex(e => e.id === action.payload.id);
+      // if (productIndex === -1) return state;
+      // const updatedProducts = [...state.allProducts];
+      // updatedProducts[productIndex] = action.payload;
       return {
         ...state,
-        allProducts: updatedProducts
+        allProducts: updatedProduct
       }
     case DELETE_PRODUCT:
       const productDelete = state.allProducts.filter(e => e.id !== action.payload);
@@ -47,6 +50,17 @@ const reducer = ( state = initialState, action ) => {
       return {
         ...state,
         category: filterCategory
+      }
+    case GET_CATEGORIES:
+      const allCategories = state.allProducts.map(e => e.category).reduce((acc, current) => {
+        if (!acc.includes(current)) {
+          acc.push(current)
+        }
+        return acc;
+      }, [])
+      return {
+        ...state,
+        categories: allCategories
       }
     case GET_PRODUCT_BY_NAME:
       const searchText = action.payload.toLowerCase();
@@ -104,6 +118,11 @@ const reducer = ( state = initialState, action ) => {
       return {
         ...state,
         category: []
+      }
+    case CLEAR_DETAIL:
+      return {
+        ...state,
+        detail: []
       }
     default: return { ...state }
   }

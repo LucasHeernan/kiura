@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductByID, addToCart } from "../redux/actions";
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Button, Caption, Headline } from "react-native-paper"
-import { Ionicons } from '@expo/vector-icons';
+import { Button, Caption, Headline, Tooltip } from "react-native-paper"
+import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 
 export default function Detail({ route, navigation }) {
 
@@ -21,7 +21,6 @@ export default function Detail({ route, navigation }) {
       id: detail.id,
       title: detail.title,
       price: detail.price,
-      stock: detail.stock,
       thumbnail: detail.thumbnail,
       total: 1
     })
@@ -60,21 +59,36 @@ export default function Detail({ route, navigation }) {
             }}
           />
         </TouchableOpacity>
+        <Tooltip
+          title="Edit product"
+          enterTouchDelay="1000"
+        >
+          <TouchableOpacity onPress={() => navigation.navigate("Update")}>
+            <SimpleLineIcons
+              name="pencil"
+              style={{
+                fontSize: 18,
+                color: '#777777',
+                padding: 12,
+                backgroundColor: '#F0F0F3',
+                borderRadius: 12,
+              }}
+            />
+          </TouchableOpacity>
+        </Tooltip>
       </View>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         {
-          detail.stock ? <Image source={{uri: detail.thumbnail}} alt={detail.title} style={styles.thumbnail} /> :
-          <Image source={{uri: detail.thumbnail}} alt={detail.title} style={styles.noStock}/>
+          detail.thumbnail === null ? <Image source={require("../../assets/icon.png")} alt={detail.title} style={styles.thumbnail} /> :
+          <Image source={{uri: detail.thumbnail}} alt={detail.title} style={styles.thumbnail} />
         }
+
         <Caption style={{letterSpacing: 2, alignItems: "center", marginBottom:2, marginTop: 20}}>{detail.category}</Caption>
         <Headline style={styles.title}>{detail.title}</Headline>
         <Headline style={styles.price}>$ {detail.price}</Headline>
-        {
-          detail.stock ? <Button icon="cash" mode="contained" style={styles.carting} onPress={handleSubmit}>ADD TO CART</Button> :
-          <Button icon="cash" mode="contained" style={styles.noCarting}
-            onPress={() => alert('At the moment we do not have this product')}>NO STOCK
-          </Button>
-        }
+
+        <Button icon="cash" mode="contained" style={styles.carting} onPress={handleSubmit}>ADD TO CART</Button>
+
         <Text style={styles.description}>{detail.description}</Text>
       </ScrollView>
     </SafeAreaView>

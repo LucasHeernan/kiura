@@ -7,6 +7,7 @@ export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
 export const GET_CATEGORY = "GET_CATEGORY";
+export const GET_CATEGORIES = "GET_CATEGORIES";
 export const ORDER_BY_PRICE = "ORDER_BY_PRICE";
 
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -16,3 +17,4 @@ export const LESS_TO_TOTAL = "LESS_TO_TOTAL";
 export const CLEAR_CART = "CLEAR_CART";
 
 export const CLEAR_PRODUCTS = "CLEAR_PRODUCTS";
+export const CLEAR_DETAIL = "CLEAR_DETAIL";

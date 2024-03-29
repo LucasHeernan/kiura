@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductByName, clearProducts } from "../redux/actions";
 import { View, Text, TouchableOpacity, StatusBar, ScrollView } from "react-native";
 import { Searchbar } from "react-native-paper";
-import { Entypo } from "@expo/vector-icons";
+import { Entypo, AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import ProductFilter from "../components/ProductFilter";
 import ProductItem from "../components/ProductItem";
@@ -29,7 +29,7 @@ export default function Products() {
       style={{
         width: "100%",
         height: "100%",
-        backgroundColor: COLOURS.white,
+        backgroundColor: COLOURS.white
       }}
     >
       <StatusBar backgroundColor={COLOURS.white} barStyle="dark-content" />
@@ -39,19 +39,20 @@ export default function Products() {
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-between",
+            alignItems: "center",
             padding: 16
           }}
         >
           <Searchbar
-            placeholder="Search"
+            placeholder="Search by name"
             onChangeText={setText}
             value={text}
+            onIconPress={() => onSubmit(text)}
             onSubmitEditing={() => onSubmit(text)}
             style={{
-              fontSize: 18,
               color: COLOURS.black,
               borderRadius: 15,
-              width: 200
+              width: 275
             }}
           />
           <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
@@ -148,6 +149,31 @@ export default function Products() {
           </View>
         </View>
       </ScrollView>
+      <View
+        style={{
+          position: "absolute",
+          right: 0,
+          bottom: 35,
+          paddingHorizontal: 16,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <TouchableOpacity onPress={() => navigation.navigate("Create")}>
+          <AntDesign
+            name="plus"
+            style={{
+              fontSize: 24,
+              color: "#173B48",
+              padding: 11,
+              borderRadius: 13,
+              borderWidth: 1,
+              borderColor: "#4CC671",
+              backgroundColor: "#0594A4"
+            }}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

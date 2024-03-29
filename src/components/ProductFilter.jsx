@@ -1,27 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
-import { useDispatch } from "react-redux";
-import { getCategory, orderByPrice } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategory, orderByPrice, getCategories } from "../redux/actions";
 
 export default function Filter() {
 
   const dispatch = useDispatch();
+  const { allProducts, categories } = useSelector(store => store);
   const [category, setCategory] = useState("");
-  const categories = ["smartphones", "laptops", "fragrances", "skincare", "groceries", "home-decoration"];
 
   const [price, setPrice] = useState("");
   const prices = ["lower price", "higher price"];
 
-  function handlerByCatogory(e) {
+  const handlerByCatogory = (e) => {
     dispatch(getCategory(e));
     alert(e);
   }
 
-  function handlerPerPrice(e) {
+  const handlerPerPrice = (e) => {
     dispatch(orderByPrice(e));
-    alert(e)
   }
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [allProducts])
 
   return (
     <View style={styles.container}>

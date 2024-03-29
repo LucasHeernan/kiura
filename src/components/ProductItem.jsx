@@ -5,7 +5,7 @@ import { Headline } from "react-native-paper";
 export default function ProductItem({ product }) {
 
   const navigation = useNavigation();
-  const { id, title, thumbnail, price, stock } = product;
+  const { id, title, thumbnail, price } = product;
 
   return (
     <View style={styles.view}>
@@ -16,11 +16,11 @@ export default function ProductItem({ product }) {
         }}
       >
         {
-          stock ? <Image source={{uri: thumbnail}} alt={title} style={styles.thumbnail} /> :
-          <Image source={{uri: thumbnail}} alt={title} style={styles.noStock} />
+          thumbnail === null ? <Image source={require("../../assets/icon.png")} alt={title} style={styles.thumbnail} /> :
+          <Image source={{uri: thumbnail}} alt={title} style={styles.thumbnail} />
         }
         <View style={styles.price}>
-          <Headline style={ stock ? ({fontWeight: "bold"}) : {fontWeight: "bold", opacity: 0.3}}>
+          <Headline style={{fontWeight: "bold"}}>
             $ {price}
           </Headline>
           <Text style={{marginTop: 10}} numberOfLines={3}>{title}</Text>

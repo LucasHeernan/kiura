@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GET_ALL_PRODUCTS, GET_PRODUCT_BY_ID, CREATE_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, GET_CATEGORY, GET_PRODUCT_BY_NAME, ORDER_BY_PRICE,
-ADD_TO_CART, REMOVE_FROM_CART, ADD_TO_TOTAL, LESS_TO_TOTAL, CLEAR_CART, CLEAR_PRODUCTS } from "../actionTypes";
+ADD_TO_CART, REMOVE_FROM_CART, ADD_TO_TOTAL, LESS_TO_TOTAL, CLEAR_CART, CLEAR_PRODUCTS, GET_CATEGORIES, CLEAR_DETAIL } from "../actionTypes";
 
 export function getAllProducts() {
   return async (dispatch) => {
@@ -17,17 +17,7 @@ export function getAllProducts() {
 }
 
 export function getProductByID(id) {
-  return async (dispatch) => {
-    try {
-      const data = await axios(`https://dummyjson.com/products/${id}`).then(e => e.data);
-      return dispatch({
-        type: GET_PRODUCT_BY_ID,
-        payload: data
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  return { type: GET_PRODUCT_BY_ID, payload: id }
 }
 
 export function createProduct(item) {
@@ -44,18 +34,8 @@ export function createProduct(item) {
   }
 }
 
-export function updateProduct(id, info) {
-  return async (dispatch) => {
-    try {
-      const data = await axios.put(`https://dummyjson.com/products/${id}`, info).then(e => e.data);
-      return dispatch({
-        type: UPDATE_PRODUCT,
-        payload: data
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
+export function updateProduct(data) {
+  return { type: UPDATE_PRODUCT, payload: data }
 }
 
 export function deleteProduct(id) {
@@ -74,6 +54,10 @@ export function deleteProduct(id) {
 
 export function getCategory(payload) {
   return { type: GET_CATEGORY, payload }
+}
+
+export function getCategories(payload) {
+  return { type: GET_CATEGORIES, payload }
 }
 
 export function getProductByName(text) {
@@ -97,7 +81,7 @@ export function addToTotal(id) {
 }
 
 export function lessToTotal(id) {
-  return { type: LESS_TO_TOTAL, payload: id}
+  return { type: LESS_TO_TOTAL, payload: id }
 }
 
 export function clearCart() {
@@ -106,4 +90,8 @@ export function clearCart() {
 
 export function clearProducts() {
   return { type: CLEAR_PRODUCTS }
+}
+
+export function clearDetail() {
+  return { type: CLEAR_DETAIL }
 }

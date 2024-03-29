@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function CartItem({ data }) {
 
-    const { id, title, description, price, stock, category, thumbnail } = data;
+    const { id, title, price, thumbnail } = data;
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const [change, setChange] = useState(1);
