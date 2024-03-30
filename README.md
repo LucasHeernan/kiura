@@ -62,11 +62,12 @@ APK
     ***
 
 
-Contacto
+CONTACTO
 
     lhbenitez@gmail.com
     +5491134921341
 
 
-Repositorio
-https://github.com/LucasHeernan/kiura
+REPOSITORIO
+
+    https://github.com/LucasHeernan/kiura
