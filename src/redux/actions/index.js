@@ -39,17 +39,7 @@ export function updateProduct(data) {
 }
 
 export function deleteProduct(id) {
-  return async (dispatch) => {
-    try {
-      const data = await axios.delete(`https://dummyjson.com/products/${id}`).then(e => e.data);
-      return dispatch({
-        type: DELETE_PRODUCT,
-        payload: data
-      })
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  return { type: DELETE_PRODUCT, payload: id }
 }
 
 export function getCategory(payload) {

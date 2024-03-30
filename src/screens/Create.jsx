@@ -22,7 +22,7 @@ export default function Create({ navigation }) {
             name="chevron-back"
             style={{
               fontSize: 18,
-              color: "#777777",
+              color: "#0594A4",
               padding: 12,
               backgroundColor: "white",
               borderRadius: 12,
@@ -30,32 +30,34 @@ export default function Create({ navigation }) {
           />
         </TouchableOpacity>
         <Text
-            style={{
-              fontSize: 20,
-              color: "black",
-              fontWeight: "500",
-            }}>
-            Edit Profile Info
+          style={{
+            fontSize: 20,
+            color: "black",
+            fontWeight: "500"
+          }}>
+          Create product
         </Text>
-        <View></View>
+        <View style={{ width: 25 }} />
       </View>
 
-      <CreateForm />
+      <View
+        style={{
+          width: "100%",
+          height: "100%",
+          marginVertical: "auto"
+        }}
+      >
+        <CreateForm />
+      </View>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20
-  },
-  button: {
-    padding: 15,
-    borderRadius: 14,
-    alignItems: "center",
-    alignSelf: "center",
-    marginTop: 70,
-    width: "70%",
-    backgroundColor: "#C7D31E",
-  },
+    paddingHorizontal: 20,
+    position: "relative",
+    height: "100%"
+  }
 });

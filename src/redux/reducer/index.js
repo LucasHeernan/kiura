@@ -15,7 +15,7 @@ const reducer = ( state = initialState, action ) => {
     case GET_ALL_PRODUCTS:
       return {
         ...state,
-        allProducts: action.payload
+        allProducts: state.allProducts.length > 0 ? state.allProducts : action.payload
       }
     case GET_PRODUCT_BY_ID:
       return {
@@ -29,11 +29,6 @@ const reducer = ( state = initialState, action ) => {
       }
     case UPDATE_PRODUCT:
       const updatedProduct = state.allProducts.map(product => product.id === action.payload.id ? action.payload : product)
-
-      // const productIndex = state.allProducts.findIndex(e => e.id === action.payload.id);
-      // if (productIndex === -1) return state;
-      // const updatedProducts = [...state.allProducts];
-      // updatedProducts[productIndex] = action.payload;
       return {
         ...state,
         allProducts: updatedProduct

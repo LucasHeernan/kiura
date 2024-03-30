@@ -54,7 +54,7 @@ export default function Cart({ navigation }) {
               name="chevron-back"
               style={{
                 fontSize: 18,
-                color: "#777777",
+                color: "#0594A4",
                 padding: 12,
                 backgroundColor: "white",
                 borderRadius: 12,
@@ -241,7 +241,7 @@ export default function Cart({ navigation }) {
           style={{
             width: "86%",
             height: "90%",
-            backgroundColor: "#C7D31E",
+            backgroundColor: "#0594A4",
             borderRadius: 20,
             justifyContent: "center",
             alignItems: "center",

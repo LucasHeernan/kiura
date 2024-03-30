@@ -52,13 +52,30 @@ export default function CartItem({ data }) {
             marginRight: 22,
           }}
         >
+          {
+            thumbnail === null ?
+              <Image
+                source={require("../../assets/kiuraLogo.png")}
+                alt={title}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  resizeMode: "contain",
+                }}
+              /> :
+              <Image
+                source={{uri: thumbnail}}
+                alt={title}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  resizeMode: "contain",
+                }}
+              />
+          }
           <Image
             source={{uri: thumbnail}}
-            style={{
-              width: "100%",
-              height: "100%",
-              resizeMode: "contain",
-            }}
+            
           />
         </TouchableOpacity>
         <View
@@ -113,11 +130,11 @@ export default function CartItem({ data }) {
                     name="minus-circle"
                     style={{
                       fontSize: 22,
-                      color: "black",
+                      color: "#4CC671",
                     }}
                   />
                 </TouchableOpacity>
-                <Text> {change} </Text>
+                <Text style={{ fontWeight: "600" }}> {change} </Text>
                 <TouchableOpacity
                   onPress={handlePlus}
                   style={{
@@ -130,7 +147,7 @@ export default function CartItem({ data }) {
                     name="plus-circle"
                     style={{
                       fontSize: 22,
-                      color: "black",
+                      color: "#4CC671",
                     }}
                   />
                 </TouchableOpacity>
@@ -140,7 +157,7 @@ export default function CartItem({ data }) {
               <Text
                 style={{
                   fontSize: 15,
-                  fontWeight: "700",
+                  fontWeight: "600",
                   maxWidth: "85%",
                   marginRight: 4,
                   color: "black"
@@ -157,7 +174,7 @@ export default function CartItem({ data }) {
                   name="x-circle"
                   style={{
                     fontSize: 22,
-                    color: "black",
+                    color: "#d32f2f",
                     borderRadius: 100,
                   }}
                 />

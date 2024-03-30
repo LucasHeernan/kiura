@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../redux/actions";
-import { View, TextInput, Button, Text, StyleSheet } from "react-native";
+import { View, TextInput, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -61,41 +61,145 @@ export default function CreateForm() {
         onSubmit={create}
       >
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
-          <View>
-            <TextInput
-              onChangeText={handleChange("title")}
-              onBlur={handleBlur("title")}
-              value={values.title}
-              placeholder="Title"
-            />
-            {touched.title && errors.title && <Text style={styles.error}>{errors.title}</Text>}
+          <View
+            style={{
+              width: "100%",
+              height: "100%",
+              flexDirection: "column",
+              alignItems: "center"
+            }}
+          >
+            <View
+              style={{
+                width: "100%",
+                position: "relative",
+                marginTop: 30
+              }}
+            >
+              <TextInput
+                style={{
+                  width: "100%",
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  backgroundColor: "rgba(71,85,105, 0.1)",
+                  paddingHorizontal: 15
+                }}
+                onChangeText={handleChange("title")}
+                onBlur={handleBlur("title")}
+                value={values.title}
+                placeholder="Title"
+              />
+              <View style={{height: 25, alignItems: "flex-start", justifyContent: "flex-start", paddingLeft: 15 }}>
+                {touched.title && errors.title && <Text style={styles.errorText}>{errors.title}</Text>}
+              </View>
+            </View>
             
-            <TextInput
-              onChangeText={handleChange("description")}
-              onBlur={handleBlur("description")}
-              value={values.description}
-              placeholder="Description"
-            />
-            {touched.description && errors.description && <Text style={styles.error}>{errors.description}</Text>}
-            
-            <TextInput
-              onChangeText={handleChange("price")}
-              onBlur={handleBlur("price")}
-              value={values.price}
-              placeholder="Price"
-              keyboardType="numeric"
-            />
-            {touched.price && errors.price && <Text style={styles.error}>{errors.price}</Text>}
-            
-            <TextInput
-              onChangeText={handleChange("category")}
-              onBlur={handleBlur("category")}
-              value={values.category}
-              placeholder="Category"
-            />
-            {touched.category && errors.category && <Text style={styles.error}>{errors.category}</Text>}
-            
-            <Button onPress={handleSubmit} title="Create product" />
+            <View
+              style={{
+                width: "100%",
+                position: "relative"
+              }}
+            >
+              <TextInput
+                style={{
+                  width: "100%",
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  backgroundColor: "rgba(71,85,105, 0.1)",
+                  paddingHorizontal: 15
+                }}
+                onChangeText={handleChange("category")}
+                onBlur={handleBlur("category")}
+                value={values.category}
+                placeholder="Category"
+              />
+              <View style={{height: 25, alignItems: "flex-start", justifyContent: "flex-start", paddingLeft: 15 }}>
+                {touched.category && errors.category && <Text style={styles.errorText}>{errors.category}</Text>}
+              </View>
+            </View>
+
+            <View
+              style={{
+                width: "100%",
+                position: "relative"
+              }}
+            >
+              <TextInput
+                style={{
+                  width: "100%",
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  backgroundColor: "rgba(71,85,105, 0.1)",
+                  paddingHorizontal: 15
+                }}
+                onChangeText={handleChange("price")}
+                onBlur={handleBlur("price")}
+                value={values.price}
+                placeholder="Price"
+                keyboardType="numeric"
+              />
+              <View style={{height: 25, alignItems: "flex-start", justifyContent: "flex-start", paddingLeft: 15 }}>
+                {touched.price && errors.price && <Text style={styles.errorText}>{errors.price}</Text>}
+              </View>
+            </View>            
+
+            <View
+              style={{
+                width: "100%",
+                position: "relative"
+              }}
+            >
+              <TextInput
+                style={{
+                  width: "100%",
+                  textAlignVertical: "top",
+                  paddingVertical: 10,
+                  borderRadius: 8,
+                  backgroundColor: "rgba(71,85,105, 0.1)",
+                  paddingHorizontal: 15
+                }}
+                numberOfLines={8}
+                onChangeText={handleChange("description")}
+                onBlur={handleBlur("description")}
+                value={values.description}
+                placeholder="Description"
+              />
+              <View style={{height: 25, alignItems: "flex-start", justifyContent: "flex-start", paddingLeft: 15 }}>
+                {touched.description && errors.description && <Text style={styles.errorText}>{errors.description}</Text>}
+              </View>
+            </View>
+
+            <View
+              style={{
+                width: "70%",
+                marginTop: 70
+              }}
+            >
+              <TouchableOpacity
+                onPress={handleSubmit}
+                style={{
+                  width: "100%",
+                  backgroundColor: "#0594A4",
+                  borderRadius: 10,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  paddingVertical: 10
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "500",
+                    letterSpacing: 1,
+                    color: "white",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Create product
+                </Text>
+              </TouchableOpacity>
+            </View>
+
           </View>
         )}
       </Formik>
@@ -103,7 +207,8 @@ export default function CreateForm() {
   );
 }
 const styles = StyleSheet.create({
-  error: {
-    color: "red",
+  errorText: {
+    color: '#d32f2f',
+    fontSize: 12
   },
 });

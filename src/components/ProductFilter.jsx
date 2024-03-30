@@ -15,7 +15,6 @@ export default function Filter() {
 
   const handlerByCatogory = (e) => {
     dispatch(getCategory(e));
-    alert(e);
   }
 
   const handlerPerPrice = (e) => {

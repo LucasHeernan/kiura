@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductByName, clearProducts } from "../redux/actions";
+import { getProductByName, clearProducts, getAllProducts } from "../redux/actions";
 import { View, Text, TouchableOpacity, StatusBar, ScrollView } from "react-native";
 import { Searchbar } from "react-native-paper";
 import { Entypo, AntDesign } from "@expo/vector-icons";
@@ -16,8 +16,13 @@ export default function Products() {
   const { allProducts, category } = useSelector(store => store);
   const navigation = useNavigation();
 
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [allProducts])
+
   const onSubmit = (e) => {
     dispatch(getProductByName(e));
+    setText("");
   }
 
   const clear = () => {
@@ -29,10 +34,10 @@ export default function Products() {
       style={{
         width: "100%",
         height: "100%",
-        backgroundColor: COLOURS.white
+        backgroundColor:"#fff"
       }}
     >
-      <StatusBar backgroundColor={COLOURS.white} barStyle="dark-content" />
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -50,7 +55,7 @@ export default function Products() {
             onIconPress={() => onSubmit(text)}
             onSubmitEditing={() => onSubmit(text)}
             style={{
-              color: COLOURS.black,
+              color: "#000000",
               borderRadius: 15,
               width: 275
             }}
@@ -60,12 +65,12 @@ export default function Products() {
               name="shopping-cart"
               style={{
                 fontSize: 18,
-                color: COLOURS.black,
+                color: "#fff",
                 padding: 13,
                 borderRadius: 13,
                 borderWidth: 1,
-                borderColor: COLOURS.black,
-                backgroundColor: COLOURS.greenDpwer
+                borderColor: "#173B48",
+                backgroundColor: "#0594A4"
               }}
             />
           </TouchableOpacity>
@@ -94,7 +99,7 @@ export default function Products() {
               <Text
                 style={{
                   fontSize: 18,
-                  color: COLOURS.black,
+                  color: "#000000",
                   fontWeight: "500",
                   letterSpacing: 1,
                 }}
@@ -114,7 +119,7 @@ export default function Products() {
               <Text
                 style={{
                   fontSize: 13,
-                  color: "#0043F9",
+                  color: "#0594A4",
                   fontWeight: "400",
                 }}
               >
@@ -123,11 +128,7 @@ export default function Products() {
             </TouchableOpacity>
           </View>
 
-          <View
-            style={{
-              flex: 1
-            }}
-          > 
+          <View>
             {
               category.length > 0 ? category.map(product => {
                 return (
@@ -163,12 +164,15 @@ export default function Products() {
           <AntDesign
             name="plus"
             style={{
-              fontSize: 24,
-              color: "#173B48",
-              padding: 11,
-              borderRadius: 13,
+              fontSize: 25,
+              color: "#fff",
+              paddingTop: 12,
+              paddingRight: 10,
+              paddingBottom: 10,
+              paddingLeft: 12,
+              borderRadius: 100,
               borderWidth: 1,
-              borderColor: "#4CC671",
+              borderColor: "#173B48",
               backgroundColor: "#0594A4"
             }}
           />
@@ -177,15 +181,3 @@ export default function Products() {
     </View>
   );
 }
-
-const COLOURS = {
-  white: "#ffffff",
-  black: "#000000",
-  green: "#00AC76",
-  greenDpwer: "#C7D31E",
-  red: "#C04345",
-  blue: "#0043F9",
-  backgroundLight: "#F0F0F3",
-  backgroundMedium: "#B9B9B9",
-  backgroundDark: "#777777",
-};

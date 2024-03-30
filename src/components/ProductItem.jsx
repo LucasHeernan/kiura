@@ -16,14 +16,14 @@ export default function ProductItem({ product }) {
         }}
       >
         {
-          thumbnail === null ? <Image source={require("../../assets/icon.png")} alt={title} style={styles.thumbnail} /> :
+          thumbnail === null ? <Image source={require("../../assets/kiuraLogo.png")} alt={title} style={styles.thumbnail} /> :
           <Image source={{uri: thumbnail}} alt={title} style={styles.thumbnail} />
         }
         <View style={styles.price}>
-          <Headline style={{fontWeight: "bold"}}>
+          <Headline style={{fontWeight: "bold", color: "#173B48"}}>
             $ {price}
           </Headline>
-          <Text style={{marginTop: 10}} numberOfLines={3}>{title}</Text>
+          <Text style={{marginTop: 10, color: "#0594A4"}} numberOfLines={3}>{title}</Text>
         </View>
       </Pressable>
     </View>
@@ -32,66 +32,11 @@ export default function ProductItem({ product }) {
 
 
 const styles = StyleSheet.create({
-  container: {
-    width: "96%",
-    height: 380,
-    borderRadius: 40,
-    backgroundColor: "white",
-    alignItems: "center",
-    alignSelf: "center",
-    padding: 5,
-    marginTop: 30,
-    overflow: "hidden"
-  },
   thumbnail: {
     width: "85%", 
     height: 220, 
     resizeMode: "contain",
     alignSelf: "center"
-  },
-  noStock: {
-    width: "85%", 
-    height: 220, 
-    resizeMode: "contain",
-    alignSelf: "center",
-    opacity: 0.3
-  },
-  text: {
-    marginTop: 9,
-    width: "100%",
-    height: "38%",
-    backgroundColor: "white",
-    borderRadius: 10
-  },
-  title: {
-    fontWeight: "600",
-    fontSize: 20,
-  },
-  containerPrice: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 5
-  },
-  price:{
-    fontWeight: "bold",
-    fontSize: 25,
-    alignItems: "center"
-  },
-  cart: {
-    borderRadius: 10,
-    alignItems: "center",
-    backgroundColor: "black",
-    padding: 6,
-    width: "70%",
-    alignSelf: "center",
-    marginTop: 5
-  },
-  addCart: {
-    color: "white",
-    fontSize: 19,
-    fontWeight: "bold"
   },
   view: {
     marginLeft: 25,
