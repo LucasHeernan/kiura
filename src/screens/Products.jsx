@@ -54,9 +54,12 @@ export default function Products() {
             value={text}
             onIconPress={() => onSubmit(text)}
             onSubmitEditing={() => onSubmit(text)}
+            iconColor="#0594A4"
+            inputStyle={{ color: "#000000" }}
             style={{
-              color: "#000000",
-              borderRadius: 15,
+              color: "#161b22",
+              backgroundColor: "rgba(71,85,105, 0.1)",
+              borderRadius: 13,
               width: 275
             }}
           />

@@ -101,7 +101,7 @@ export default function Detail({ route, navigation }) {
           <Image source={{uri: detail.thumbnail}} alt={detail.title} style={styles.thumbnail} />
         }
 
-        <Caption style={{letterSpacing: 2, alignItems: "center", marginBottom:2, marginTop: 20}}>{detail.category}</Caption>
+        <Caption style={{letterSpacing: 2, alignItems: "center", marginBottom:2, marginTop: 20, color: "#000000", opacity: 0.5}}>{detail.category}</Caption>
         <Headline style={styles.title}>{detail.title}</Headline>
         <Headline style={styles.price}>$ {detail.price}</Headline>
 
@@ -135,6 +135,8 @@ const styles = StyleSheet.create({
     borderRadius: 12
   },
   title: {
+    color: "#000000",
+    opacity: 0.8,
     lineHeight: 20,
     fontSize: 15,
     fontWeight: "bold",

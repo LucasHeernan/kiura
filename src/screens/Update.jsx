@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateProduct, clearDetail } from "../redux/actions";
+import { updateProduct, clearDetail, clearProducts } from "../redux/actions";
 import { useNavigation } from "@react-navigation/native";
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -45,6 +45,7 @@ export default function Update() {
   const update = async (values, formikActions) => {
     const updatedValues = {...values, category: values.category.toLowerCase() };
     dispatch(updateProduct(updatedValues));
+    dispatch(clearProducts());
     dispatch(clearDetail());
     alert("Product modify successfully!");
     console.log("VALUES ", values);
