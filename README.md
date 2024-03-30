@@ -59,7 +59,7 @@ Una vez que Expo inicie el servidor de desarrollo, puedes abrir Expo Go en tu di
 
 APK
 
-    ***
+    https://expo.dev/artifacts/eas/m7GtcHndr4JvUKvuXkUf99.apk
 
 
 CONTACTO
